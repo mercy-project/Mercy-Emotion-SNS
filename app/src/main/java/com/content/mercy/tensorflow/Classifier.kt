@@ -41,12 +41,14 @@ abstract class Classifier {
         tflite = Interpreter(model, tfliteOptions)
         labels = loadLabelList(activity)
         imgData = ByteBuffer.allocateDirect(DIM_BATCH_SIZE * getImageSizeX() * getImageSizeY()
-                * DIM_PIXEL_SIZE * getNumBytesPerChannel())
+                * getDimPixelSize() * getNumBytesPerChannel())
             .apply {
                 order(ByteOrder.nativeOrder())
             }
         Log.d(TAG, "Created a TensorFlow Lite Image Classifier.")
     }
+
+    open fun getDimPixelSize(): Int = 3
 
     companion object {
         private val TAG = Classifier::class.java.simpleName
@@ -55,7 +57,7 @@ abstract class Classifier {
         private const val MAX_RESULTS: Int = 3
         /** Dimensions of inputs. */
         private const val DIM_BATCH_SIZE: Int = 1
-        private const val DIM_PIXEL_SIZE: Int = 3
+        //private const val DIM_PIXEL_SIZE: Int = 3
 
         /**
          * Creates a classifier with the provided configuration.
@@ -66,11 +68,8 @@ abstract class Classifier {
          * @param numThreads The number of threads to use for classification.
          * @return A classifier with the desired configuration.
          */
-        fun create(activity: Activity, model: Model, device: Device, numThreads: Int): Classifier
-                = when (model) {
-            Model.QUANTIZED -> ClassifierQuantizedMobileNet(activity, device, numThreads)
-            else -> ClassifierFloatMobileNet(activity, device, numThreads)
-        }
+        fun create(activity: Activity, device: Device, numThreads: Int): Classifier
+            = MercyVisionClassifier(activity, device, numThreads)
 
         /** An immutable result returned by a Classifier describing what was recognized. */
         class Recognition(val id: String,       // A unique identifier for what has been recognized. Specific to the class, not the instance of the object.
@@ -80,11 +79,6 @@ abstract class Classifier {
 
             override fun toString(): String = "[$id] $title ${String.format("(%.1f%%) ", confidence * 100f)} $location"
         }
-    }
-
-    /** The model type used for classification. */
-    enum class Model {
-        FLOAT, QUANTIZED
     }
 
     /** The runtime device type used for executing classification. */
@@ -116,7 +110,7 @@ abstract class Classifier {
     /** Reads label list from Assets. */
     private fun loadLabelList(activity: Activity): List<String> {
         val labels = ArrayList<String>()
-        val reader: BufferedReader = BufferedReader(InputStreamReader(activity.assets.open(getLabelPath())))
+        val reader = BufferedReader(InputStreamReader(activity.assets.open(getLabelPath())))
         while (true) {
             val line = reader.readLine() ?: break
             labels.add(line)
@@ -137,21 +131,22 @@ abstract class Classifier {
 
     /** Writes Image data into a {@code ByteBuffer}. */
     private fun convertBitmapToByteBuffer(bitmap: Bitmap) {
-        imgData?.run {
-            this.rewind()
-            bitmap.getPixels(intValues, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
-            // Convert the image to floating point.
-            var pixel = 0
-            val startTime = SystemClock.uptimeMillis()
-            for (i in 0 until getImageSizeX()) {
-                for (j in 0 until getImageSizeY()) {
-                    val value = intValues[pixel++]
-                    addPixelValue(value)
-                }
-            }
-            val endTime = SystemClock.uptimeMillis()
-            Log.v(TAG, "Timecost to put values into ByteBuffer: ${endTime - startTime}")
+        imgData.rewind()
+        if (bitmap.width * bitmap.height != intValues.size) {
+            Log.d(TAG, "bitmap(width=${bitmap.width}, height=${bitmap.height})")
+            Log.d(TAG, "intValues: ${intValues.size}")
+            Log.d(TAG, "getImageSizeX(): ${getImageSizeX()}, getImageSizeY(): ${getImageSizeY()}")
+            return
         }
+
+        bitmap.getPixels(intValues, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
+        // Convert the image to floating point.
+        val startTime = SystemClock.uptimeMillis()
+        for (value in intValues) {
+            addPixelValue(value)
+        }
+        val endTime = SystemClock.uptimeMillis()
+        Log.v(TAG, "Timecost to put values into ByteBuffer: ${endTime - startTime}")
     }
 
     /** Runs inference and returns the classification results. */
@@ -172,10 +167,8 @@ abstract class Classifier {
         Log.v(TAG, "Timecost to run model inference: ${endTime - startTime}")
 
         // Find the best classifications.
-        val pq = PriorityQueue<Recognition>(3, object: Comparator<Recognition> {
-            override fun compare(lhs: Recognition, rhs: Recognition): Int {
-                return rhs.confidence.compareTo(lhs.confidence)
-            }
+        val pq = PriorityQueue<Recognition>(3, Comparator { lhs: Recognition, rhs: Recognition ->
+            return@Comparator rhs.confidence.compareTo(lhs.confidence)
         })
         for (i in labels.indices) {
             pq.add(Recognition(i.toString(),
