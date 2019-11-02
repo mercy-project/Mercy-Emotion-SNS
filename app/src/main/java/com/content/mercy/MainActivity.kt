@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         // ActionBar
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.app_name)
             setDisplayShowTitleEnabled(true)
         }
