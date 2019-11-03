@@ -1,4 +1,4 @@
-package com.content.mercy.main
+package com.content.mercy.main.fragment
 
 import com.content.mercy.BasePresenter
 import com.content.mercy.BaseView

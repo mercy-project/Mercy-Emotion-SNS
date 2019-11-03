@@ -1,5 +1,6 @@
-package com.content.mercy.main
+package com.content.mercy.main.fragment
 
+import com.content.mercy.main.fragment.FriendContract
 import com.content.mercy.model.Friend
 import com.content.mercy.repository.FriendRepository
 

@@ -1,5 +1,5 @@
 
-package com.content.mercy.main
+package com.content.mercy.main.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,8 @@ import kotlinx.android.synthetic.main.activity_friend_fragment.view.*
 
 class FriendFragment : Fragment(), FriendContract.View {
 
-    private var mPresenter: FriendContract.Presenter = FriendPresenter()
+    private var mPresenter: FriendContract.Presenter =
+        FriendPresenter()
 
     override var presenter: FriendContract.Presenter
         get() = mPresenter

@@ -7,9 +7,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.content.mercy.camera.CameraActivity
-import com.content.mercy.main.CalenderFragment
-import com.content.mercy.main.FriendFragment
-import com.content.mercy.main.MainFragment
+import com.content.mercy.main.fragment.CalenderFragment
+import com.content.mercy.main.fragment.FriendFragment
+import com.content.mercy.main.fragment.MainFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 

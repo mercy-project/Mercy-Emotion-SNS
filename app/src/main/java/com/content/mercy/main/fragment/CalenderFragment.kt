@@ -1,4 +1,4 @@
-package com.content.mercy.main
+package com.content.mercy.main.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
