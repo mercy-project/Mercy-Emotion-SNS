@@ -33,5 +33,4 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="parent"
         app:menu="@menu/menu" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
