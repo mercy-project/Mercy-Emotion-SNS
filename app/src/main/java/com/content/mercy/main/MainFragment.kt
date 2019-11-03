@@ -1,6 +1,8 @@
 package com.content.mercy.main
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_main.view.*
  */
 class MainFragment : Fragment(), MainContract.View {
 
-    private var mPresenter: MainContract.Presenter = MainPresenter()
+    private var mPresenter: MainContract.Presenter = MainPresenter(this)
 
     override var presenter: MainContract.Presenter
         get() = mPresenter
@@ -30,12 +32,15 @@ class MainFragment : Fragment(), MainContract.View {
             val friends = ArrayList<User>().apply {
                 addAll(mPresenter.getFriends())
             }
-            adapter = FriendListAdapter(friends).apply {
+            adapter = FriendListAdapter(this@MainFragment, friends).apply {
+                /*
                 itemClickListener = object : FriendListAdapter.ItemClickListener {
                     override fun onItemClick(view: View, position: Int) {
+                        Log.d(TAG, "Item click: $position")
                         mPresenter.showFriendDetail(position)
                     }
                 }
+                */
             }
         }
 
@@ -46,4 +51,10 @@ class MainFragment : Fragment(), MainContract.View {
         super.onViewCreated(view, savedInstanceState)
     }
     */
+
+    override fun getActivityContext(): Context = requireContext()
+
+    companion object {
+        private val TAG = MainFragment::class.java.simpleName
+    }
 }

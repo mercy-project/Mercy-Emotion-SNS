@@ -18,6 +18,14 @@ import com.content.mercy.util.toByteArray
  */
 class VisionAnalyzer(private val activity: Activity) : ImageAnalysis.Analyzer {
 
+    interface OnImageProcessListener {
+        fun onImageProcess(results: List<Classifier.Companion.Recognition>)
+    }
+    private var mOnImageProcessListener: OnImageProcessListener? = null
+    var onImageProcessListener: OnImageProcessListener?
+        get() = mOnImageProcessListener
+        set(value) { mOnImageProcessListener = value }
+
     private val mClassifier: Classifier = Classifier.create(activity, Classifier.Device.CPU, 1)
 
     private var mRgbBytes: IntArray? = null
@@ -63,6 +71,8 @@ class VisionAnalyzer(private val activity: Activity) : ImageAnalysis.Analyzer {
         Log.i(TAG, "Detect: $results")
         Log.d(TAG, "crop: ${croppedBitmap.width}x${croppedBitmap.height}")
         Log.d(TAG, "processing time: ${SystemClock.uptimeMillis() - startTime}ms")
+
+        mOnImageProcessListener?.onImageProcess(results)
     }
 
     private fun getScreenOrientation(): Int = when (activity.windowManager.defaultDisplay.rotation) {
