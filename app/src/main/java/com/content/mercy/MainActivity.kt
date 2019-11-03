@@ -7,30 +7,25 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.content.mercy.camera.CameraActivity
 import com.content.mercy.main.MainFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(){
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         // ActionBar
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.app_name)
             setDisplayShowTitleEnabled(true)
-
-
-
         }
 
         supportFragmentManager.beginTransaction()
             .add(R.id.container, MainFragment())
             .commit()
-
 
 
     }
