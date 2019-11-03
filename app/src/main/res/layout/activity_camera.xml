@@ -13,7 +13,8 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@android:color/transparent"/>
 
     <com.content.mercy.ui.AutoFitTextureView
         android:id="@+id/viewFinder"
@@ -21,12 +22,8 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toTopOf="@id/container"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.675"/>
 
     <TextView
         android:id="@+id/timerView"
@@ -44,9 +41,22 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/viewFinder"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.25"
-        android:background="@android:color/darker_gray">
+        android:background="@android:color/black">
+
+        <TextView
+            android:id="@+id/chartTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Emotion Graph (Real time)"
+            android:textColor="@color/gray_light"
+            android:textStyle="bold"
+            android:textSize="14sp"/>
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/chart"
@@ -54,18 +64,18 @@
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/recordButton"/>
+            app:layout_constraintTop_toBottomOf="@id/chartTitle"
+            app:layout_constraintBottom_toTopOf="@id/recordButton"
+            android:background="@android:color/transparent"/>
 
         <ToggleButton
             android:id="@+id/recordButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:textOff="녹화"
-            android:textOn="종료"/>
+            android:background="@drawable/roundbutton"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

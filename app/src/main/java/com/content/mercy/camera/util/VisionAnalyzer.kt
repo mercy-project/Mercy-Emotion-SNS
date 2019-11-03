@@ -35,44 +35,48 @@ class VisionAnalyzer(private val activity: Activity) : ImageAnalysis.Analyzer {
             mRgbBytes = this
         }
 
-        // [1] YUV -> RGB
-        val yBuffer = image.planes[0].buffer.toByteArray()
-        val uBuffer = image.planes[1].buffer.toByteArray()
-        val vBuffer = image.planes[2].buffer.toByteArray()
-        val yuvBuffer = byteArrayOf(*yBuffer, *uBuffer, *vBuffer)
-        ImageUtils.convertYUV420SPToARGB8888(yuvBuffer, image.width, image.height, rgbBytes)
-        val yuvBytes = arrayOf(yuvBuffer)
+        try {
+            // [1] YUV -> RGB
+            val yBuffer = image.planes[0].buffer.toByteArray()
+            val uBuffer = image.planes[1].buffer.toByteArray()
+            val vBuffer = image.planes[2].buffer.toByteArray()
+            val yuvBuffer = byteArrayOf(*yBuffer, *uBuffer, *vBuffer)
+            ImageUtils.convertYUV420SPToARGB8888(yuvBuffer, image.width, image.height, rgbBytes)
+            //val yuvBytes = arrayOf(yuvBuffer)
 
-        val sensorOrientation = rotationDegrees - getScreenOrientation()
-        val rgbFrameBitmap = Bitmap.createBitmap(image.width, image.height, Bitmap.Config.ARGB_8888)
-        val croppedBitmap = Bitmap.createBitmap(
-            mClassifier.getImageSizeX(),
-            mClassifier.getImageSizeY(),
-            Bitmap.Config.ARGB_8888)
-        val frameToCropTransform = ImageUtils.getTransformationMatrix(
-            image.width,
-            image.height,
-            mClassifier.getImageSizeX(),
-            mClassifier.getImageSizeY(),
-            sensorOrientation,
-            MAINTAIN_ASPECT)
-        val cropToFrameTransform = Matrix().apply {
-            frameToCropTransform.invert(this)
+            val sensorOrientation = rotationDegrees - getScreenOrientation()
+            val rgbFrameBitmap = Bitmap.createBitmap(image.width, image.height, Bitmap.Config.ARGB_8888)
+            val croppedBitmap = Bitmap.createBitmap(
+                mClassifier.getImageSizeX(),
+                mClassifier.getImageSizeY(),
+                Bitmap.Config.ARGB_8888)
+            val frameToCropTransform = ImageUtils.getTransformationMatrix(
+                image.width,
+                image.height,
+                mClassifier.getImageSizeX(),
+                mClassifier.getImageSizeY(),
+                sensorOrientation,
+                MAINTAIN_ASPECT)
+            val cropToFrameTransform = Matrix().apply {
+                frameToCropTransform.invert(this)
+            }
+            rgbFrameBitmap.setPixels(rgbBytes, 0, image.width, 0, 0, image.width, image.height)
+
+            val canvas = Canvas(croppedBitmap).apply {
+                drawBitmap(rgbFrameBitmap, frameToCropTransform, null)
+            }
+
+            // Run
+            val startTime = SystemClock.uptimeMillis()
+            val results = mClassifier.recognizeImage(croppedBitmap)
+            Log.i(TAG, "Detect: $results")
+            Log.d(TAG, "crop: ${croppedBitmap.width}x${croppedBitmap.height}")
+            Log.d(TAG, "processing time: ${SystemClock.uptimeMillis() - startTime}ms")
+
+            mOnImageProcessListener?.onImageProcess(results)
+        } catch (e: IllegalStateException) {
+
         }
-        rgbFrameBitmap.setPixels(rgbBytes, 0, image.width, 0, 0, image.width, image.height)
-
-        val canvas = Canvas(croppedBitmap).apply {
-            drawBitmap(rgbFrameBitmap, frameToCropTransform, null)
-        }
-
-        // Run
-        val startTime = SystemClock.uptimeMillis()
-        val results = mClassifier.recognizeImage(croppedBitmap)
-        Log.i(TAG, "Detect: $results")
-        Log.d(TAG, "crop: ${croppedBitmap.width}x${croppedBitmap.height}")
-        Log.d(TAG, "processing time: ${SystemClock.uptimeMillis() - startTime}ms")
-
-        mOnImageProcessListener?.onImageProcess(results)
     }
 
     private fun getScreenOrientation(): Int = when (activity.windowManager.defaultDisplay.rotation) {

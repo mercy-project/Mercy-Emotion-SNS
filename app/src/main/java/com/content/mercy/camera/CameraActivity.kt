@@ -10,9 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
-import android.view.Surface
-import android.view.TextureView
-import android.view.WindowManager
+import android.view.*
 import androidx.camera.core.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -25,7 +23,6 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import kotlinx.android.synthetic.main.activity_camera.*
-import kotlinx.android.synthetic.main.activity_camera.chart
 
 class CameraActivity : AppCompatActivity(), CameraContract.View {
 
@@ -42,6 +39,7 @@ class CameraActivity : AppCompatActivity(), CameraContract.View {
     )
     private val mRequestCode = 0x0001
 
+    // TODO: move to res/string-array
     private val emotions = arrayListOf(
         "anger",
         "disgust/contempt",
@@ -66,10 +64,17 @@ class CameraActivity : AppCompatActivity(), CameraContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
 
+
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.attributes.apply {
             screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_FULL
             window.attributes = this
+        }
+
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayShowTitleEnabled(false)
+            setDisplayHomeAsUpEnabled(true)
         }
 
         if (mRequiredPermissions.all { ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED }) {
@@ -80,7 +85,7 @@ class CameraActivity : AppCompatActivity(), CameraContract.View {
 
         viewFinder.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ -> updateTransform() }
 
-        // FIXME: 이미지 크기 변화 문제가 있다..
+        /* FIXME: 이미지 크기 변화 문제가 있다..
         recordButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 mPresenter.startRecord()
@@ -88,6 +93,7 @@ class CameraActivity : AppCompatActivity(), CameraContract.View {
                 mPresenter.stopRecord()
             }
         }
+        */
 
         setGraph()
     }
@@ -143,7 +149,7 @@ class CameraActivity : AppCompatActivity(), CameraContract.View {
         val imageAnalysis = mPresenter.buildImageAnalysisUseCase()
         val imageCapture = mPresenter.buildImageCaptureUseCase()
         val videoCapture = mPresenter.buildVideoCaptureUseCase()
-        CameraX.bindToLifecycle(this, preview, imageAnalysis, imageCapture)
+        CameraX.bindToLifecycle(this, preview, imageAnalysis, imageCapture/*, videoCapture*/)
     }
 
     @SuppressLint("RestrictedApi")
@@ -190,11 +196,14 @@ class CameraActivity : AppCompatActivity(), CameraContract.View {
 
     private fun setGraph() {
         val barDataset = BarDataSet(mGraphData, "").apply {
-            //color = ContextCompat.getColor(this@GraphActivity, R.color.colorAccent)
             colors = listOf(
-                ContextCompat.getColor(this@CameraActivity, R.color.colorAccent),
-                ContextCompat.getColor(this@CameraActivity, R.color.colorPrimary),
-                ContextCompat.getColor(this@CameraActivity, R.color.colorPrimaryDark)
+                ContextCompat.getColor(this@CameraActivity, R.color.red),
+                ContextCompat.getColor(this@CameraActivity, R.color.green),
+                ContextCompat.getColor(this@CameraActivity, R.color.blue),
+                ContextCompat.getColor(this@CameraActivity, R.color.yellow),
+                ContextCompat.getColor(this@CameraActivity, android.R.color.white),
+                ContextCompat.getColor(this@CameraActivity, R.color.gray),
+                ContextCompat.getColor(this@CameraActivity, R.color.purple)
             )
         }
         //chart.animateY(5000)
@@ -222,6 +231,18 @@ class CameraActivity : AppCompatActivity(), CameraContract.View {
         chart.data = barData
         chart.setFitBars(true)
         chart.invalidate()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.camera, toolbar.menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> { }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     companion object {
