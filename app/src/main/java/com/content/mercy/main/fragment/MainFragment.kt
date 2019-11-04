@@ -13,6 +13,7 @@ import com.content.mercy.R
 import com.content.mercy.camera.CameraActivity
 import com.content.mercy.main.adapter.FeelListAdapter
 import com.content.mercy.model.FeelCard
+import com.content.mercy.text.TextActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
@@ -77,7 +78,9 @@ class MainFragment : Fragment(), View.OnClickListener {
             R.id.fab_camera -> {
                 startActivity(Intent(context, CameraActivity::class.java))
             }
-            R.id.fab_text -> { }
+            R.id.fab_text -> {
+                startActivity(Intent(context, TextActivity::class.java))
+            }
         }
     }
 }
