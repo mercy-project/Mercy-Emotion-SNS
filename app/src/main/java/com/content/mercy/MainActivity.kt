@@ -15,6 +15,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(){
 
+    private var backKeyPressedTime: Long = 200
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -82,5 +85,19 @@ class MainActivity : AppCompatActivity(){
 
     companion object {
         private val TAG = MainActivity::class.java.simpleName
+    }
+
+    override fun onBackPressed() {
+        val delay = 500
+        when {
+            System.currentTimeMillis() > backKeyPressedTime + delay -> {
+                backKeyPressedTime = System.currentTimeMillis()
+                return
+            }
+            System.currentTimeMillis() <= backKeyPressedTime + delay -> {
+                this.finish()
+            }
+        }
+
     }
 }
