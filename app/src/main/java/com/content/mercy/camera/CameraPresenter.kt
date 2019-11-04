@@ -19,9 +19,9 @@ class CameraPresenter(private val view: CameraContract.View) : CameraContract.Pr
 
     private var mResoultion = Size(0, 0)
 
-    private var mSeconds = 0
-    private var mTimerHandler = Handler()
-    private lateinit var mTicker: Runnable
+    //private var mSeconds = 0
+    //private var mTimerHandler = Handler()
+    //private lateinit var mTicker: Runnable
 
     private var mImageCapture: ImageCapture? = null
     private var mVideoCapture: VideoCapture? = null
@@ -29,6 +29,7 @@ class CameraPresenter(private val view: CameraContract.View) : CameraContract.Pr
     init { start() }
 
     override fun start() {
+        /*
         mTicker = Runnable {
             try {
                 view.updateTimer(mSeconds)
@@ -37,6 +38,7 @@ class CameraPresenter(private val view: CameraContract.View) : CameraContract.Pr
                 mTimerHandler.postDelayed(mTicker, 1000)
             }
         }
+        */
     }
 
     override fun getResolution(): Size = mResoultion
@@ -122,13 +124,13 @@ class CameraPresenter(private val view: CameraContract.View) : CameraContract.Pr
                 Log.e(TAG, "Message: $message")
             }
         })
-        mSeconds = 0
-        mTicker.run()
+        //mSeconds = 0
+        //mTicker.run()
     }
 
     @SuppressLint("RestrictedApi")
     override fun stopRecord() {
-        mTimerHandler.removeCallbacksAndMessages(null)
+        //mTimerHandler.removeCallbacksAndMessages(null)
         mVideoCapture?.stopRecording()
     }
 

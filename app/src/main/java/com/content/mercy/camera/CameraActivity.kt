@@ -118,12 +118,14 @@ class CameraActivity : AppCompatActivity(), CameraContract.View {
     override fun getViewFinder(): TextureView = viewFinder
 
     override fun updateTimer(seconds: Int) {
+        /*
         runOnUiThread {
             timerView.text = String.format(
                 getString(R.string.recording_time,
                     seconds / 60,
                     seconds % 60))
         }
+        */
     }
 
     private fun startCamera() {
@@ -216,6 +218,7 @@ class CameraActivity : AppCompatActivity(), CameraContract.View {
             valueFormatter = object : IndexAxisValueFormatter() {
                 override fun getFormattedValue(value: Float): String = emotions[value.toInt()]
             }
+            textColor = ContextCompat.getColor(this@CameraActivity, android.R.color.white)
         }
         val yAxisLeft = chart.axisLeft.apply {
             axisMaximum = 1f
@@ -234,7 +237,7 @@ class CameraActivity : AppCompatActivity(), CameraContract.View {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.camera, toolbar.menu)
+        //menuInflater.inflate(R.menu.camera, toolbar.menu)
         return true
     }
 
