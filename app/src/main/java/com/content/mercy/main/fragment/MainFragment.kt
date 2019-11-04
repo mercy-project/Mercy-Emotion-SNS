@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.content.mercy.R
 import com.content.mercy.main.adapter.FeelListAdapter
 import com.content.mercy.model.FeelCard
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.activity_friend_fragment.*
-import kotlinx.android.synthetic.main.fragment_main.*
-
+import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment(){
 
@@ -30,13 +28,10 @@ var feelList= arrayListOf<FeelCard>(
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_main, container, false)
 
-
-        val mAdapter = FeelListAdapter(feelList)
-        mainRecycler.adapter = mAdapter
-        recyclerView?.setHasFixedSize(true)
-        recyclerView?.layoutManager = LinearLayoutManager(context, LinearLayout.HORIZONTAL, false)
-
-
+        rootView.mainRecycler.apply {
+            adapter = FeelListAdapter(requireContext(), feelList)
+            layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        }
 
         val mFab = rootView.findViewById<FloatingActionButton>(R.id.fab_main)
         mFab.setOnClickListener {
