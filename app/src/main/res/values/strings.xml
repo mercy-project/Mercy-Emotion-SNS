@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">Mercy</string>
-
+    <string name="app_name">Mercy Project</string>
+    <string name="main_text">How were your feelings each day?</string>
     <string name="header_my_profile">내 프로필</string>
 
     <string name="recording_time">%1$d:%2$02d</string>
+
 </resources>

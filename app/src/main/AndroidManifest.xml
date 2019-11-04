@@ -18,6 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".main.fragment.CalenderFragment"></activity>
+        <activity android:name=".main.fragment.FriendFragment" />
         <activity android:name=".camera.CameraActivity"
             android:theme="@style/FullscreenAppTheme" />
         <activity android:name=".MainActivity">

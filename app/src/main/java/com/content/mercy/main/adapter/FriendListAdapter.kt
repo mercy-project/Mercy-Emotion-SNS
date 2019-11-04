@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.content.mercy.R
-import com.content.mercy.main.MainContract
+import com.content.mercy.main.fragment.FriendContract
 import com.content.mercy.model.User
 import java.util.*
 import kotlin.collections.ArrayList
@@ -14,7 +14,7 @@ import kotlin.collections.ArrayList
 /**
  * Created by rapsealk on 2019-11-02..
  */
-class FriendListAdapter(private val context: MainContract.View, private val mItems: ArrayList<User>)
+class FriendListAdapter(private val context: FriendContract.View, private val mItems: ArrayList<User>)
     : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     init {

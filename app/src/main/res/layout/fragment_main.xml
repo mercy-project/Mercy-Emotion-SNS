@@ -1,27 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginEnd="8dp"
-        app:fastScrollEnabled="true"
-        app:fastScrollVerticalTrackDrawable="@drawable/fastscroll_track_drawable"
-        app:fastScrollVerticalThumbDrawable="@drawable/fastscroll_thumb_drawable"
-        app:fastScrollHorizontalTrackDrawable="@drawable/fastscroll_track_drawable"
-        app:fastScrollHorizontalThumbDrawable="@drawable/fastscroll_thumb_drawable"
-        android:scrollbars="vertical"
-        android:overScrollMode="never"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="#313131"
+        android:textStyle="bold"
+        android:text="@string/main_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mainRecycler"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_width="350dp"
+            android:layout_height="300dp" />
+
+
+    </LinearLayout>
+
+
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fab_video"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#828282"
+        android:src="@drawable/ic_picture_in_picture_black_24dp"
+        android:visibility="invisible"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_voice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fab_video"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#828282"
+        android:src="@drawable/ic_settings_voice_black_24dp"
+        android:visibility="invisible"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_video"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fab_camera"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#828282"
+        android:src="@drawable/ic_video_call_black_24dp"
+        android:visibility="invisible"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fab_text"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#828282"
+        android:src="@drawable/ic_camera_black_24dp"
+        android:visibility="invisible"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fab_main"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#828282"
+        android:src="@drawable/ic_text_fields_black_24dp"
+        android:visibility="invisible"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="#636363"
+        android:src="@drawable/ic_add_circle_outline_black_24dp"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
+
+
+</RelativeLayout>
