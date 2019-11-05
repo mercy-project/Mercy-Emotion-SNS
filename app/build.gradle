@@ -60,6 +60,11 @@ dependencies {
     //calender
     implementation 'com.github.prolificinteractive:material-calendarview:1.4.3'
 
+    // Room
+    def room_version = "2.2.1"
+    implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-compiler:$room_version"
+
     // CameraX
     def camerax_version = "1.0.0-alpha05"
     implementation "androidx.camera:camera-core:$camerax_version"
