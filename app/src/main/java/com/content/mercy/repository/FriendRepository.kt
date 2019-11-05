@@ -4,9 +4,6 @@ import com.content.mercy.model.Friend
 import java.util.*
 import kotlin.collections.ArrayList
 
-/**
- * Created by rapsealk on 2019-11-03..
- */
 class FriendRepository {
 
     // FIXME

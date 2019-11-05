@@ -10,8 +10,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.content.mercy.R
 import com.content.mercy.model.FeelCard
-import java.util.*
-import kotlin.collections.ArrayList
 
 class FeelListAdapter (val context: Context, val feelList: ArrayList<FeelCard>) : RecyclerView.Adapter<FeelListAdapter.Holder>() {
 

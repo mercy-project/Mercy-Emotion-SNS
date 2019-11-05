@@ -24,14 +24,14 @@ class MainFragment : Fragment(), View.OnClickListener {
 
         val emotions = resources.getStringArray(R.array.emotions)
         val feelList = arrayListOf(
-            FeelCard("Welsh Corgi", emotions[0], "0", "dog00"),
-            FeelCard("Chow Chow", emotions[1], "4", "dog00"),
-            FeelCard("Breed Pomeranian", emotions[2], "1", "dog01"),
-            FeelCard("Golden Retriver", emotions[3], "3", "dog02"),
-            FeelCard("Yorkshire Terrier", emotions[4], "5", "dog03"),
-            FeelCard("Pug", emotions[5], "6", "dog04"),
-            FeelCard("Alaskan Malamute", emotions[6], "7", "dog05"),
-            FeelCard("Shih Tzu", emotions[7], "5", "dog06")
+            FeelCard("2019-11-05", emotions[0], "Today is my birthday. I had a happy day with my friends.", "dog00"),
+            FeelCard("2019-11-05", emotions[1], "It was so saaaaaad.\u2028I’m so depressed today.", "dog00"),
+            FeelCard("2019-11-05", emotions[2], "I went to Itaewon with my boyfriend for a date. I had a great time with him.", "dog01"),
+            FeelCard("2019-11-05", emotions[3], "I went to Itaewon with my boyfriend for a date. I had a great time with him.", "dog02"),
+            FeelCard("2019-11-05", emotions[4], "I went to Itaewon with my boyfriend for a date. I had a great time with him.", "dog03"),
+            FeelCard("2019-11-05", emotions[5], "I went to Itaewon with my boyfriend for a date. I had a great time with him.", "dog04"),
+            FeelCard("2019-11-05", emotions[6], "I went to Itaewon with my boyfriend for a date. I had a great time with him.", "dog05"),
+            FeelCard("2019-11-05", emotions[7], "I went to Itaewon with my boyfriend for a date. I had a great time with him.", "dog06")
         )
 
         rootView.mainRecycler.apply {

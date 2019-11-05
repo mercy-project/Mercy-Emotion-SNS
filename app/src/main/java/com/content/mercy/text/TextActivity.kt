@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import com.content.mercy.R
 import com.content.mercy.retrofit.Repo
 import com.content.mercy.retrofit.RetrofitClient
@@ -37,10 +38,12 @@ class TextActivity : AppCompatActivity() {
             android.R.id.home -> {
                 val text = diary.text.toString()
                 // TODO: Progress + Room
+
                 RetrofitClient.retrofitService.listRepos(text).enqueue(object : Callback<Repo> {
                     override fun onResponse(call: Call<Repo>, response: Response<Repo>) {
                         Log.d(TAG, "Retrofit onResponse")
                         response.body()?.let {
+                            Toast.makeText(this@TextActivity, "${it.sentiment} 입니다.", Toast.LENGTH_LONG).show()
                             Log.d(TAG, "Response(sentiment=${it.sentiment}, sentence=${it.sentence})")
                         }
                     }
