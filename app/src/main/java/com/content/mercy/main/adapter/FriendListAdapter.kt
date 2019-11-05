@@ -19,7 +19,7 @@ class FriendListAdapter(private val context: FriendContract.View, private val mI
 
     init {
         mItems.addAll(0, arrayListOf(
-            User(UUID.randomUUID().toString(), "사용자"),
+            User(UUID.randomUUID().toString(), "Mercy Project"),
             User(UUID.randomUUID().toString(), "친구")
         ))
     }
