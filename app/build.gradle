@@ -60,7 +60,6 @@ dependencies {
     //calender
     implementation 'com.github.prolificinteractive:material-calendarview:1.4.3'
 
-
     // CameraX
     def camerax_version = "1.0.0-alpha05"
     implementation "androidx.camera:camera-core:$camerax_version"
@@ -69,6 +68,9 @@ dependencies {
     // TensorFlow Lite
     implementation 'org.tensorflow:tensorflow-lite:1.13.1'
     implementation 'org.tensorflow:tensorflow-lite-gpu:0.0.0-nightly'
+
+    // Chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

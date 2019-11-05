@@ -2,10 +2,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/camera"
-        android:title=""
-        android:icon="@drawable/ic_photo_camera_outlined_24px"
-        app:showAsAction="always"/>
-
 </menu>

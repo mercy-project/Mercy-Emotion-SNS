@@ -75,8 +75,7 @@ class AutoFitPreviewBuilder private constructor(
 
         // Every time the view finder is updated, recompute layout
         useCase.onPreviewOutputUpdateListener = Preview.OnPreviewOutputUpdateListener {
-            val viewFinder =
-                viewFinderRef.get() ?: return@OnPreviewOutputUpdateListener
+            val viewFinder = viewFinderRef.get() ?: return@OnPreviewOutputUpdateListener
             Log.d(TAG, "Preview output changed. " +
                     "Size: ${it.textureSize}. Rotation: ${it.rotationDegrees}")
 

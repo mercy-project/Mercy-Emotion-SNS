@@ -5,4 +5,13 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="defaultBackground">@android:color/white</color>
+
+    <color name="red">#F75837</color>
+    <color name="green">#00D85A</color>
+    <color name="blue">#3FB6DC</color>
+    <color name="yellow">#F8E71C</color>
+    <color name="purple">#EF72EF</color>
+
+    <color name="gray">#8A8A8A</color>
+    <color name="gray_light">#CFD8DC</color>
 </resources>

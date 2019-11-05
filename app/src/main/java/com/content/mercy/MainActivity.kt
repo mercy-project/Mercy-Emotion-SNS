@@ -1,12 +1,9 @@
 package com.content.mercy
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.content.mercy.camera.CameraActivity
 import com.content.mercy.main.fragment.CalenderFragment
 import com.content.mercy.main.fragment.FriendFragment
 import com.content.mercy.main.fragment.MainFragment
@@ -29,6 +26,7 @@ class MainActivity : AppCompatActivity(){
         // ActionBar
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
+            setHomeAsUpIndicator(R.drawable.ic_menu_24px)
             setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.app_name)
             setDisplayShowTitleEnabled(true)
@@ -65,20 +63,9 @@ class MainActivity : AppCompatActivity(){
         transaction.commit()
     }
 
-
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main, toolbar.menu)
-        return true
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             //android.R.id.home -> { }
-            R.id.camera -> {
-                val intent = Intent(this, CameraActivity::class.java)
-                startActivity(intent)
-            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -98,6 +85,5 @@ class MainActivity : AppCompatActivity(){
                 this.finish()
             }
         }
-
     }
 }

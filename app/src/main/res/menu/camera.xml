@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/camera_option_01"
+        android:title=""
+        android:icon="@drawable/ic_photo_camera_outlined_24px"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/camera_option_02"
+        android:title=""
+        android:icon="@drawable/ic_photo_camera_outlined_24px"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/camera_option_03"
+        android:title=""
+        android:icon="@drawable/ic_photo_camera_outlined_24px"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/camera_option_04"
+        android:title=""
+        android:icon="@drawable/ic_photo_camera_outlined_24px"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/camera_option_05"
+        android:title=""
+        android:icon="@drawable/ic_photo_camera_outlined_24px"
+        app:showAsAction="always"/>
+
+</menu>
