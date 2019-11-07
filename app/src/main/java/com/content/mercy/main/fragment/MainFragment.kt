@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.content.mercy.R
 import com.content.mercy.camera.CameraActivity
 import com.content.mercy.main.adapter.FeelListAdapter
-import com.content.mercy.model.FeelCard
+import com.content.mercy.model.entity.FeelCard
 import com.content.mercy.text.TextActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_main.view.*
@@ -24,14 +24,62 @@ class MainFragment : Fragment(), View.OnClickListener {
 
         val emotions = resources.getStringArray(R.array.emotions)
         val feelList = arrayListOf(
-            FeelCard("2019-11-05", emotions[0], "Today is my birthday. I had a happy day with my friends.", "dog00"),
-            FeelCard("2019-11-05", emotions[1], "It was so saaaaaad.\u2028I’m so depressed today.", "dog00"),
-            FeelCard("2019-11-05", emotions[2], "I went to Itaewon with my boyfriend for a date. I had a great time with him.", "dog01"),
-            FeelCard("2019-11-05", emotions[3], "I went to Itaewon with my boyfriend for a date. I had a great time with him.", "dog02"),
-            FeelCard("2019-11-05", emotions[4], "I went to Itaewon with my boyfriend for a date. I had a great time with him.", "dog03"),
-            FeelCard("2019-11-05", emotions[5], "I went to Itaewon with my boyfriend for a date. I had a great time with him.", "dog04"),
-            FeelCard("2019-11-05", emotions[6], "I went to Itaewon with my boyfriend for a date. I had a great time with him.", "dog05"),
-            FeelCard("2019-11-05", emotions[7], "I went to Itaewon with my boyfriend for a date. I had a great time with him.", "dog06")
+            FeelCard(
+                System.currentTimeMillis(),
+                "2019-11-05",
+                emotions[0],
+                "Today is my birthday. I had a happy day with my friends.",
+                "dog00"
+            ),
+            FeelCard(
+                System.currentTimeMillis(),
+                "2019-11-05",
+                emotions[1],
+                "It was so saaaaaad.\u2028I’m so depressed today.",
+                "dog00"
+            ),
+            FeelCard(
+                System.currentTimeMillis(),
+                "2019-11-05",
+                emotions[2],
+                "I went to Itaewon with my boyfriend for a date. I had a great time with him.",
+                "dog01"
+            ),
+            FeelCard(
+                System.currentTimeMillis(),
+                "2019-11-05",
+                emotions[3],
+                "I went to Itaewon with my boyfriend for a date. I had a great time with him.",
+                "dog02"
+            ),
+            FeelCard(
+                System.currentTimeMillis(),
+                "2019-11-05",
+                emotions[4],
+                "I went to Itaewon with my boyfriend for a date. I had a great time with him.",
+                "dog03"
+            ),
+            FeelCard(
+                System.currentTimeMillis(),
+                "2019-11-05",
+                emotions[5],
+                "I went to Itaewon with my boyfriend for a date. I had a great time with him.",
+                "dog04"
+            ),
+            FeelCard(
+                System.currentTimeMillis(),
+                "2019-11-05",
+                emotions[6],
+                "I went to Itaewon with my boyfriend for a date. I had a great time with him.",
+                "dog05"
+            ),
+            FeelCard(
+                System.currentTimeMillis(),
+                "2019-11-05",
+                emotions[7],
+                "I went to Itaewon with my boyfriend for a date. I had a great time with him.",
+                "dog06"
+            )
         )
 
         rootView.mainRecycler.apply {

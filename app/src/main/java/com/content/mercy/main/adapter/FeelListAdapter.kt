@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.content.mercy.R
-import com.content.mercy.model.FeelCard
+import com.content.mercy.model.entity.FeelCard
 
 class FeelListAdapter (val context: Context, val feelList: ArrayList<FeelCard>) : RecyclerView.Adapter<FeelListAdapter.Holder>() {
 
@@ -46,8 +46,8 @@ class FeelListAdapter (val context: Context, val feelList: ArrayList<FeelCard>) 
             )
             Log.d(TAG, "emotions: ${emotions.joinToString(", ")}")
             Log.d(TAG, "emoticons: ${emoticons.joinToString(", ")}")
-            val id = emotions.indexOf(feel.Feeling)
-            Log.d(TAG, "emotion: ${feel.Feeling}, index: $id")
+            val id = emotions.indexOf(feel.feeling)
+            Log.d(TAG, "emotion: ${feel.feeling}, index: $id")
             if (id > -1) {
                 val drawable = emoticons[id]
                 Log.d(TAG, "emoticon: $drawable")
@@ -62,9 +62,9 @@ class FeelListAdapter (val context: Context, val feelList: ArrayList<FeelCard>) 
                 image?.setImageResource(R.mipmap.ic_launcher)
             }
             */
-            Date?.text = feel.Date
-            Feeling?.text = feel.Feeling
-            Description?.text = feel.Description
+            Date?.text = feel.date
+            Feeling?.text = feel.feeling
+            Description?.text = feel.description
         }
     }
 
